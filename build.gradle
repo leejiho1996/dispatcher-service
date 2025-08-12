@@ -18,11 +18,17 @@ repositories {
 }
 
 ext {
+	set('otelVersion', "1.33.3")
 	set('springCloudVersion', "2025.0.0")
 }
 
 dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux' // 액츄에이터를 사용하기 위해서는 웹서버 필요
+
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	runtimeOnly "io.opentelemetry.javaagent:opentelemetry-javaagent:${otelVersion}"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'

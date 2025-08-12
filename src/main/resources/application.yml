@@ -21,3 +21,18 @@ spring:
     password: password
     connection-timeout: 5s
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health # /actuator/health 엔드포인트를 노출한다.
+  endpoint:
+    health:
+      show-details: always # 상세정보 제공
+      show-components: always # 구성요소 정보 제공
+      probes:
+        enabled: true # 활성 및 준비 상태 프로브 지원 활성화
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
